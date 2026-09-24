@@ -1,0 +1,32 @@
+[package]
+name = "usados"
+version = "1.0.0"
+edition = "2024"
+description = "Marcar como usado: move arquivos para a pasta de usados pelo clique direito do Windows"
+
+[dependencies]
+windows = { version = "0.62.2", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Storage_FileSystem",
+    "Win32_System_Com",
+    "Win32_System_LibraryLoader",
+    "Win32_System_SystemInformation",
+    "Win32_System_Threading",
+    "Win32_UI_Controls",
+    "Win32_UI_Shell",
+    "Win32_UI_Shell_Common",
+    "Win32_UI_WindowsAndMessaging",
+] }
+winreg = "0.56.0"
+
+[build-dependencies]
+embed-resource = "3.0.11"
+
+[profile.release]
+# .exe pequeno (~400 KB)
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"
